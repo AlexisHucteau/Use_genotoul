@@ -13,9 +13,9 @@ module load bioinfo/rmats-turbo-v4.1.2
 
 cd ~/work/PTBP1_cell_line_fastq/
 
-run_rmats --s1 ~/work/prep1.txt \
-  --gtf ~/work/Homo_sapiens.GRCh38.99.gtf -t paired \
-  --bi ~/work/star-genome/ \
+run_rmats --b1 /home/ahucteau/work/post1.txt --b2 /home/ahucteau/work/post2.txt \
+  --gtf /home/ahucteau/work/Homo_sapiens.GRCh38.99.gtf -t paired \
   --readLength 151 --nthread 7 \
-  --od ~/work/PTBP1_cell_line_fastq/output/ --tmp ~/work/PTBP1_cell_line_fastq/tmp_output_prep_1 \
-  --task prep
+  --od /home/ahucteau/work/PTBP1_cell_line_fastq/output_rmats \
+  --tmp /home/ahucteau/work/PTBP1_cell_line_fastq/tmp_output_prep_1 \
+  --task post

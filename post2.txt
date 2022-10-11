@@ -1,0 +1,1 @@
+/home/ahucteau/work/PTBP1_cell_line_fastq/tmp_output_prep_1/2022-10-11-11_38_51_305801_bam1_1/Aligned.sortedByCoord.out.bam
