@@ -2,17 +2,11 @@
 
 ################### INPUT ###################
 
-# read -p 'List of Fastq: ' Fastq_file
-# read -p 'Replicat nomenclature 1 (ex: "_R1_001.fastq.gz"): ' nomenclature_1
-# read -p 'Replicat nomenclature 2 (ex: "_R2_001.fastq.gz"): ' nomenclature_2
-# read -p 'Work directory: ' workdir
-workdir=$(echo /home/ahucteau/work/PTBP1_cell_line_fastq/)
-
-Fastq_file=$(echo List_of_Fastq.txt)
-nomenclature_1=$(echo _R1_001.fastq.gz)
-nomenclature_2=$(echo _R2_001.fastq.gz)
-
-
+read -p 'Work directory: ' workdir
+cd $workdir
+read -p 'List of Fastq: ' Fastq_file
+read -p 'Replicat nomenclature 1 (ex: "_R1_001.fastq.gz"): ' nomenclature_1
+read -p 'Replicat nomenclature 2 (ex: "_R2_001.fastq.gz"): ' nomenclature_2
 
 nFiles=$(wc -l < $Fastq_file)
 nprocesses=$(expr $nFiles \* 2)
@@ -31,7 +25,7 @@ do
   start_line=$(expr $start_line + 1)
   end_line=$(expr $start_line + 31)
   lines=$(echo $start_line\,$end_line\p)
-  sed -n $lines < List_of_Fastq.txt > prep_auto$i.txt
+  sed -n $lines < $Fastq_file > prep_auto$i.txt
 
   for fastqfile in $(cat prep_auto$i.txt)
   do
@@ -42,7 +36,7 @@ do
   echo '#!/bin/bash' > script_pre_$i.sh
   echo '#SBATCH -p workq' >> script_pre_$i.sh
 
-  echo '#SBATCH -t 1-00:00:00 #Acceptable time formats include "minutes", "minutes:seconds", "hours:minutes:seconds", "days-hours", "days-hours:minutes" and "days-hours:minutes:seconds".' >> script_pre_$i.sh
+  echo '#SBATCH -t 4-00:00:00 #Acceptable time formats include "minutes", "minutes:seconds", "hours:minutes:seconds", "days-hours", "days-hours:minutes" and "days-hours:minutes:seconds".' >> script_pre_$i.sh
   echo '#SBATCH --cpus-per-task 7' >> script_pre_$i.sh
   echo '#SBATCH --mem=100G' >> script_pre_$i.sh
 
@@ -57,7 +51,7 @@ do
   echo   '--gtf ~/work/Homo_sapiens.GRCh38.99.gtf -t paired \' >> script_pre_$i.sh
   echo   '--bi ~/work/star-genome/ \' >> script_pre_$i.sh
   echo   '--readLength 151 --nthread 7 \' >> script_pre_$i.sh
-  echo   '--od' $workdir'output/ \'>> script_pre_$i.sh
-  echo   '--tmp' ~/work/PTBP1_cell_line_fastq/tmp_output_prep_$i '\' >> script_pre_$i.sh
+  echo   '--od' output/ '\'>> script_pre_$i.sh
+  echo   '--tmp' tmp_output_prep_$i '\' >> script_pre_$i.sh
   echo   '--task prep' >> script_pre_$i.sh
 done
