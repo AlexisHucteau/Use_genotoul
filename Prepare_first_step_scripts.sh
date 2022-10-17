@@ -41,8 +41,8 @@ do
   echo '#SBATCH -p workq' >> script_pre_$i.sh
 
   echo '#SBATCH -t 4-00:00:00' >> script_pre_$i.sh
-  echo '#SBATCH --cpus-per-task 16' >> script_pre_$i.sh
-  echo '#SBATCH --mem=499G' >> script_pre_$i.sh
+  echo '#SBATCH --cpus-per-task 8' >> script_pre_$i.sh
+  echo '#SBATCH --mem-per-cpu=4000' >> script_pre_$i.sh
 
   echo '#Load modules' >> script_pre_$i.sh
   echo '#Need Miniconda3' >> script_pre_$i.sh
@@ -54,7 +54,8 @@ do
   echo run_rmats --s1 prep_auto$i.txt '\' >> script_pre_$i.sh
   echo   '--gtf ~/work/Homo_sapiens.GRCh38.99.gtf -t paired \' >> script_pre_$i.sh
   echo   '--bi ~/work/star-genome/ \' >> script_pre_$i.sh
-  echo   '--readLength 151 --nthread 16 \' >> script_pre_$i.sh
+  echo   '--outBAMsortingBinsN 100 \' >> script_pre_$i.sh
+  echo   '--readLength 151 --nthread 8 \' >> script_pre_$i.sh
   echo   '--od' output/ '\'>> script_pre_$i.sh
   echo   '--tmp' tmp_output_prep_$i '\' >> script_pre_$i.sh
   echo   '--task prep' >> script_pre_$i.sh
