@@ -1,10 +1,10 @@
 #!/bin/bash
 
-workdir=/home/ahucteau/work/Koichi_data/
-Fastq_file=List_sample2.txt
-nomenclature_1=_1.fastq.gz
-nomenclature_2=_2.fastq.gz
-output=output_Koichi
+workdir=/home/ahucteau/work/TUH_patient_data/
+Fastq_file=List_sample3.txt
+nomenclature_1=_R1_001.fastq.gz
+nomenclature_2=_R2_001.fastq.gz
+output=output_TUH
 
 mkdir $workdir$output
 

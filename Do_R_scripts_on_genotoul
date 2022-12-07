@@ -1,0 +1,10 @@
+#!/bin/bash
+#SBATCH -p workq
+#SBATCH -t 1-00:00:00 #Acceptable time formats include "minutes", "minutes:seconds", "hours:minutes:seconds", "days-hours", "days-hours:minutes" and "days-hours:minutes:seconds".
+#SBATCH --cpus-per-task 7
+#SBATCH --mem=100G
+
+#Load modules
+module load system/R-4.0.4_gcc-9.3.0
+
+R prepare_BMIQ_data.R
